@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <title>Insta Stats</title>
+</head>
+
+<body>
+  <div id="insta" class="content">
+    <h1>Get and record instagram stats</h1>
+    <div class="heading">
+      <div class="circle">1</div>
+      <h2>Enter Username</h2>
+			<br>
+			<h4> (wait a minute to scrape the latest data)</h4>
+    </div>
+    <div class="add">
+      <div class="form">
+        <input v-model="username" placeholder="Username">
+        <button @click="upload">Enter</button>
+      </div>
+      <div class="upload" v-if="addUser">
+        <h2>{{addUser.username}}</h2>
+				<div class="stat" v-for="stat in addUser.stats">
+					<h3>Recorded: {{stat.timestamp}}</h3>
+					<h3>Followers: {{stat.followersCount}}</h3>
+					<h3>Following: {{stat.followingCount}}</h3>
+				</div>
+      </div>
+			<div class="upload" v-if="noUser">
+				<h2>No User Found</h2>
+			</div>
+		</div>
+    <div class="heading">
+      <div class="circle">-</div>
+      <h2>Delete User</h2>
+    </div>
+    <div class="edit">
+      <div class="form">
+        <input v-model="findUsername" placeholder="Search">
+        <div class="suggestions" v-if="suggestions.length > 0">
+          <div class="suggestion" v-for="s in suggestions" @click="selectUser(s)">{{s.username}}
+          </div>
+        </div>
+      </div>
+      <div class="actions" v-if="findUser">
+        <button @click="deleteUser(findUser)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+		<a class="pull-left" href="https://github.com/Cannonjc/creative-4">Github Repo</a>
+	</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+  <script src="/index.js"></script>
+</body>
+
+</html>
